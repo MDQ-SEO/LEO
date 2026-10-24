@@ -1,0 +1,29 @@
+# User-agent rules for standard web crawlers
+User-agent: *
+Allow: /
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.webp
+Allow: /*.svg
+
+# Disallow administrative, backend, and utility directories (if applicable)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*?*
+
+# Explicitly allow major search engine AI crawlers for AI search visibility
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# XML Sitemap Location
+Sitemap: https://leosurfacecoatings.com/sitemap.xml

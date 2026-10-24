@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Skip redirection for local development (localhost / 127.0.0.1)
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+RewriteRule ^ - [L]
+
+# Redirect HTTP/HTTPS www to HTTPS non-www
+RewriteCond %{HTTP_HOST} ^www\.leosurfacecoatings\.com$ [NC,OR]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://leosurfacecoatings.com/$1 [R=301,L]

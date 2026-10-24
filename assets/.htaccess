@@ -1,0 +1,12 @@
+# Disable PHP Execution in Uploads Directory
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Block all script extensions
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps|phar|inc|pl|py|cgi|sh|bat|exe)$">
+    Require all denied
+</FilesMatch>
