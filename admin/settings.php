@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config.php';
+checkAdminLogin();
 
 $db = getDB();
 
@@ -24,6 +25,8 @@ $s = [];
 foreach ($rows as $r) {
     $s[$r['setting_key']] = $r['setting_value'];
 }
+
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="space-y-6 max-w-4xl mx-auto">

@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config.php';
+checkAdminLogin();
 
 $db = getDB();
 
@@ -103,6 +104,8 @@ if ($filter !== 'all') {
     $stmt = $db->query("SELECT * FROM assets ORDER BY uploaded_at DESC");
 }
 $assets = $stmt->fetchAll();
+
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="space-y-6">

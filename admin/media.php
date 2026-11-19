@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config.php';
+checkAdminLogin();
 
 $db = getDB();
 
@@ -117,6 +118,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])
 }
 
 $items = $db->query("SELECT * FROM media_gallery ORDER BY sort_order ASC, id ASC")->fetchAll();
+
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="space-y-6">

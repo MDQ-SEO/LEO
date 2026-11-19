@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config.php';
+checkAdminLogin();
 
 $db = getDB();
 
@@ -28,6 +29,8 @@ if ($search) {
     $stmt = $db->query("SELECT * FROM pages ORDER BY title ASC");
 }
 $pages = $stmt->fetchAll();
+
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="space-y-6">

@@ -1,4 +1,8 @@
 <?php
+if (!ob_get_level()) {
+    ob_start();
+}
+
 // Session Security Settings (Before session_start)
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);

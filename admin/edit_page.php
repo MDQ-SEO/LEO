@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config.php';
+checkAdminLogin();
 
 $db = getDB();
 $id = (int)($_GET['id'] ?? 0);
@@ -41,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: edit_page.php?id=" . $id);
     exit;
 }
+
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="space-y-6 max-w-5xl mx-auto">

@@ -4,6 +4,14 @@ checkAdminLogin();
 
 $current_page = basename($_SERVER['PHP_SELF']);
 $flash = getFlash();
+
+$hdr_contacts_count = 0;
+$hdr_careers_count = 0;
+try {
+    $db_hdr = getDB();
+    $hdr_contacts_count = (int)$db_hdr->query("SELECT COUNT(*) FROM contact_submissions")->fetchColumn();
+    $hdr_careers_count = (int)$db_hdr->query("SELECT COUNT(*) FROM career_submissions")->fetchColumn();
+} catch (Exception $e) {}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +74,28 @@ $flash = getFlash();
                 <a href="index.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition <?= $current_page == 'index.php' ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' ?>">
                     <i class="fa-solid fa-chart-line w-5 text-center text-blue-500"></i> Dashboard
                 </a>
+
+                <div class="pt-2 px-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Submissions</div>
+
+                <a href="contacts.php" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition <?= $current_page == 'contacts.php' ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' ?>">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-envelope-open-text w-5 text-center text-cyan-500"></i> Contact Inquiries
+                    </div>
+                    <?php if ($hdr_contacts_count > 0): ?>
+                        <span class="bg-cyan-100 text-cyan-800 text-xs px-2 py-0.5 rounded-full font-bold"><?= $hdr_contacts_count ?></span>
+                    <?php endif; ?>
+                </a>
+
+                <a href="careers.php" class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition <?= $current_page == 'careers.php' ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' ?>">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-user-tie w-5 text-center text-purple-500"></i> Job Applications
+                    </div>
+                    <?php if ($hdr_careers_count > 0): ?>
+                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-0.5 rounded-full font-bold"><?= $hdr_careers_count ?></span>
+                    <?php endif; ?>
+                </a>
+
+                <div class="pt-2 px-3 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Content & Media</div>
                 
                 <a href="pages.php" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition <?= in_array($current_page, ['pages.php', 'edit_page.php']) ? 'bg-blue-50 text-blue-700 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' ?>">
                     <i class="fa-solid fa-file-lines w-5 text-center text-indigo-500"></i> Manage Pages
@@ -83,15 +113,10 @@ $flash = getFlash();
                     <i class="fa-solid fa-sliders w-5 text-center text-amber-500"></i> Site Settings
                 </a>
             </div>
-
-            <div class="border-t border-gray-100 pt-4 px-3 text-xs text-gray-400">
-                <div><strong class="text-gray-600">Database:</strong> leoantigra_db</div>
-                <div class="mt-1"><strong class="text-gray-600">Server:</strong> XAMPP MySQL</div>
-            </div>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 p-6 overflow-hidden">
+        <main class="flex-1 min-w-0 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <?php if ($flash): ?>
                 <div class="mb-6 p-4 rounded-lg flex items-center justify-between <?= $flash['type'] == 'success' ? 'bg-emerald-50 border border-emerald-200 text-emerald-800' : 'bg-rose-50 border border-rose-200 text-rose-800' ?>">
                     <div class="flex items-center gap-3 text-sm font-medium">
